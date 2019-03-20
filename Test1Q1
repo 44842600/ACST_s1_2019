@@ -1,0 +1,15 @@
+#Assume y(1)= rate between time 0 to time 1 year i.e rate between day 0 and year 1 (2nd coupon payment)
+#Tut 1 Line 28
+anfunction=function(y,n=length(y)){
+tmp=c(y)
+tmpp=0
+for(n in 1:n){tmpp=exp(-tmp[n]*n)+tmpp}
+return(tmpp[1])
+}
+ffunction=function(f,y,n=length(y)){f*exp(-y[n]*n)}
+value=function(c,f,y){c*anfunction(y)+ffunction(f,y)}
+#checking 2: interest rates are different
+anfunction(c(0.1,0.2))
+value(1,1,c(0.1,0.2))
+checks=1*exp(-0.1*1)+1*exp(-0.2*2)+1*exp(-(0.2+0.2))
+checks
