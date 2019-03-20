@@ -9,17 +9,17 @@ dataset
 #Plot Singapore GDP against time. Label horizontal axis as 'Time'; label vertical axis as 'GDP (%)'. Put a title 'Singapore GDP growth' on above the plot.
 #Tut 2 Line 18
 ?plot
-plot(dataset$time, dataset$gdp,main="Sngapore GDP growth", xlab="Time",ylab="GDP(%)")
+#plot(dataset$time, dataset$gdp,main="Sngapore GDP growth", xlab="Time",ylab="GDP(%)")
 attach(dataset)
 plot(time,gdp,main="Sngapore GDP growth", xlab="Time",ylab="GDP(%)")
 #Calculate the mean and standard deviation of Singapore GDP for each of the three periods defined by variable period. Then use the calculated statistics for each period to create a data table named 'stat.table'.
 ?mean
-mean(gdp[period==1])
-mean(gdp[period==2])
-mean(gdp[period==3])
-sd(gdp[period==1])
-sd(gdp[period==2])
-sd(gdp[period==3])
+#mean(gdp[period==1])
+#mean(gdp[period==2])
+#mean(gdp[period==3])
+#sd(gdp[period==1])
+#sd(gdp[period==2])
+#sd(gdp[period==3])
 ?aggregate
 mean1=aggregate(dataset[, 3], list(dataset$period), mean)
 names(mean1)[2]<-paste("mean")
@@ -42,8 +42,8 @@ summary(l1)
 l2=lm(gdp~exp+epg+hpr+oil+gdpus+crd)
 summary(l2)
 #Comment: t-values of exp,epg and hpr are large and p-values are small. So they are significant and should be included in the model. t-values of oil,gdpus and drd are small and p-values are large, more than 0.05. So there is no clear evidence of a real association between these three predictors with the response. They can be excluded from the model. R-squared shows 37.2% of the variability of the response can be explained by the linear function. F-statistic shows the model or at least one predictor is useful.
-#Calculate the 5% quantile of gdp using function quantile(). The economy is said to be in a crisis state if gdp is lower than its 0.05 quantile, and in a normal state otherwise. Based on gdp, create a factor
-vector for the economy state and name it state. Then put this vector in the dataset using the data.frame() function. For the state, fit the logistic regression model using up to year 2007 as training data period, with bci as the only predictor. Compute the confusion matrix.
+#Calculate the 5% quantile of gdp using function quantile(). The economy is said to be in a crisis state if gdp is lower than its 0.05 quantile, and in a normal state otherwise. 
+#Based on gdp, create a factor vector for the economy state and name it state. Then put this vector in the dataset using the data.frame() function. For the state, fit the logistic regression model using up to year 2007 as training data period, with bci as the only predictor. Compute the confusion matrix.
 ?quantile
 q1=quantile(gdp,probs=0.05)
 q1
