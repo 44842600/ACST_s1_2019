@@ -13,3 +13,17 @@ anfunction(c(0.1,0.2))
 value(1,1,c(0.1,0.2))
 checks=1*exp(-0.1*1)+1*exp(-0.2*2)+1*exp(-(0.2+0.2))
 checks
+#The above calculation is according to the P formula in the question. The below is to assume y(0.5)= rate between time 0 to 0.5 year( 1st coupon payment), y(1)= rate between time 0.5 to 1 year( between 1st coupon payment and 2nd coupon payment), i.e. it's not exp(-y*t) as in the above calculation, it's exp(-y1-y2-...yt)
+#The below calculation is not required by the question. I include here just in case there's different interpretation of the P formula.
+anfunction=function(y,n=length(y)){
+  tmpp=0
+  for(n in 1:n){tmpp=exp(-sum(y[1:n]))+tmpp}
+  return(tmpp[1])
+}
+ffunction=function(f,y,n=length(y)){f*exp(-sum(y[1:n]))}
+value=function(c,f,y){c*anfunction(y)+ffunction(f,y)}
+#checking 2: interest rates are different
+anfunction(c(0.1,0.2))
+value(1,1,c(0.1,0.2))
+checks=1*exp(-0.1)+1*exp(-0.2-0.1)+1*exp(-0.2-0.1)
+checks
