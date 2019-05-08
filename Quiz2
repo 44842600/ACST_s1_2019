@@ -1,0 +1,44 @@
+#12.1 Change Beisel’s name to Weisel.
+# Include in your answer details of how you downloaded structure.pdb into your AWS account.
+#To download the file.
+curl https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/chapter-11-regex--structure.pdb > structure.pdb
+#To check the content. Same as that on page 161.
+cat structure.pdb
+#To replace “Beisel” with “Weisel”.
+sed 's/Beisel/Weisel/' structure.pdb > structure.pdb
+#In the fourth line, “Beisel” is replaced by “Weisel”
+#12.2 Delete the first three lines of the file.
+# (make sure your sed code doesn’t output the three lines)
+sed -n '1,3d' structure.pdb
+#-n is to make it silent.
+#To check if 1-3 lines have been deleted, need to print at the same time. Then use the code below. It displayed from the fourth line.
+sed '1,3d' structure.pdb
+#12.3 Print only lines 5 through 10
+# (just these six lines should be output)
+sed -n '5,10p' structure.pdb
+#12.4 Delete lines containing the word MET
+# (so no lines with this string should be output) Line 6,9,16-23 didn’t display.
+sed '/MET/d' structure.pdb
+#12.5 Print all lines where the HELIX line contains the word ILE
+sed -n '/HELIX.*ILE/p' structure.pdb
+#Only line 10 and 12 that have both “HELIX” and “ILE” displayed
+#12.6 Append three stars to the end of lines starting with “H”
+sed '/^H/s/$/***/' structure.pdb
+#Only line 10-12 were added “***” at the end as they are the only lines start with “H”
+#12.7 Replace the line containing SEQRES with SEQ
+# (change ‘line’ to ‘lines’; your code should replace any instance of the string SEQRES)
+sed '/SEQRES/s/^.*$/SEQ/' structure.pdb
+#Line 6-9 were replaced by “SEQ” as they have “SEQRES”
+#12.8 Create a file with text and blank lines. Then delete all blank lines of that file
+#Use the file jabberwocky.txt instead of your own file. This file is available in the wk08 area of iLearn. Include in your answer an explanation of how you uploaded this file into your AWS account.
+#To upload jabberwocky.txt to AWS
+#Use “exit” to get out of ubuntu first.
+scp -i 44842600.pem jabberwocky.txt ubuntu@ec2-54-252-245-107.ap-southeast-2.compute.amazonaws.com:
+#To login ubuntu again.
+#To check if upload is successful
+ls
+#The file is there.
+#To check if there’s any blank lines
+cat jabberwocky.txt
+#To delete the blank lines
+sed '/^[[:space:]]*$/d' jabberwocky.txt
