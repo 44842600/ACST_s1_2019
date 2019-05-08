@@ -1,0 +1,106 @@
+#Q1 In our file twain.txt, how would you convert all instances of the strick ‘Huck’ to ‘HucK’?
+#To download file twain.txt
+curl -s http://www.gutenberg.org/files/76/76-0.txt > twain.txt
+#To replace “Huck” to “HucK”, first to find how many “Huck” and how many “HucK” in the file.
+grep -c “Huck” twain.txt
+#There’re 97 “Huck” in twain.txt
+grep -c “HucK” twain.txt
+#There’re 0 “HucK” in twain.txt
+#To replace “Huck” to “HucK” and save as a new file twain_1.txt
+sed 's/’Huck’/’HucK’/g' twain.txt > twain_1.txt
+#To check if all the “Huck” have been replaced by “HucK”
+grep -c “Huck” twain_1.txt
+#There’re 0 “Huck” in twain.txt
+grep -c “HucK” twain_1.txt
+#There’re 97 “HucK” in twain.txt
+#Q2 What happens if you try to execute userargument.py with each of the following command lines:
+#Search stdio source code and copy from the website below:
+#https://introcs.cs.princeton.edu/python/code/stdio.py.html
+#Use nano in ubuntu and paste the code. Use ^x to exit and name the file stdio.py
+#Use nano in ubuntu and paste the code below. Use ^x to exist and name the file userargument.py
+import sys
+import stdio
+stdio.write(‘Hi , ’)
+stdio.write(sys.argv [1])
+stdio.writeln(‘. How are you?’)
+#To run the codes below
+#a. python userargument.py python, it returns error as we use python3. So the codes below have been all replaced the first “python” with “python3”
+python3 userargument.py python
+#It returns “Hi, python. How are you?”
+#b. python userargument.py @!&^%, it returns error as we use python3. So the codes below have been all replaced the first “python” with “python3”
+python3 userargument.py @!&^%
+#It returns “-bash: !: event not found”
+#c. python userargument.py 1234, it returns error as we use python3. So the codes below have been all replaced the first “python” with “python3”
+python3 userargument.py 1234
+#It returns “Hi, 1234. How are you?”
+#d. python userargument.py Bob, it returns error as we use python3. So the codes below have been all replaced the first “python” with “python3”
+python3 userargument.py Bob
+#It returns “Hi, Bob. How are you?”
+#e. userargument.py Bob
+#It returns “useargument.py: command not found”
+#f. python userargument.py Alice Bob, it returns error as we use python3. So the codes below have been all replaced the first “python” with “python3”
+python3 userargument.py Alice Bob
+#It returns “Hi, Alice. How are you?”
+#Q3 Write python code to test whether a given integer corresponds to a leap year in the Gregorian calendar.
+#Use nano to copy and paste the codes below. Use ^x to exit and save as q3.py
+import sys
+y=int(sys.argv[1])
+if y % 400 == 0:
+  print("%d is a leap year"%(y))
+elif y % 100 == 0:
+  print("%d is not a leap year"%(y))
+elif y % 4 == 0:
+  print("%d is a leap year"%(y))
+else:
+  print("%d is not a leap year"%(y))
+#To test, run “python3 q3.py 1900”. It returns “1900 is not a leap year.”
+#To test, run “python3 q3.py 2004”. It returns “2004 is a leap year.”
+#To test, run “python3 q3.py 2000”. It returns “2000 is a leap year.”
+#To test, run “python3 q3.py 2001”. It returns “2001 is not a leap year.”
+#Q4 Compose a python program that takes two integers a and b from the command line and writes a random integer between a and b.
+#Use nano to copy and paste the codes below. Use ^x to exit and save as q4.py
+import sys
+import random
+a=int(sys.argv[1])
+b=int(sys.argv[2])
+c=random.randint(a+1,b-1)
+print("A random integer between %d and %d is %d"% (a,b,c))
+#If use random.randint(a,b), a and b will be included. Then need to narrow the range to (a+1,b-1)
+#To test, run “python3 q4.py 1 4”. It returns either “A random integer between 1 and 4 is 2” or “A random integer between 1 and 4 is 3”.
+#Q5 Compose a python program that takes two integers m and d from the command line and writes True if day d of month m is between March 20 and June 20, and False otherwise. (Interpret m with 1 for January, 2 for February, and so forth.)
+#Use nano to copy and paste the codes below. Use ^x to exit and save as q5.py
+import sys
+m=int(sys.argv[1])
+d=int(sys.argv[2])
+if(m==3 and d>=21 and d<=31) or (m==6 and d>=1 and d<=19) or (m>3 and m<6 and d>=1 and d<=30) or (m==5 and d==31):
+  print('True')
+else:
+  print('False')
+#To test, run the codes below:
+#“python3 q5.py 3 20”. It returns “False”.
+#“python3 q5.py 3 21”. It returns “True”.
+#“python3 q5.py 3 31”. It returns “True”.
+#“python3 q5.py 3 32”. It returns “False”.
+#“python3 q5.py 4 1”. It returns “True”.
+#“python3 q5.py 4 20”. It returns “True”.
+#“python3 q5.py 4 21”. It returns “True”.
+#“python3 q5.py 4 30”. It returns “True”.
+#“python3 q5.py 4 31”. It returns “False”.
+#“python3 q5.py 5 1”. It returns “True”.
+#“python3 q5.py 5 20”. It returns “True”.
+#“python3 q5.py 5 31”. It returns “True”.
+#“python3 q5.py 5 32”. It returns “False”.
+#“python3 q5.py 6 1”. It returns “True”.
+#“python3 q5.py 6 19”. It returns “True”.
+#“python3 q5.py 6 20”. It returns “False”.
+#Q6 Compose a python program that calculates and writes the amount of money you would have if you invested it at a given interest rate (compounded continuously), taking the number of years t, the principal P, and the annual interest rate r as command-line arguments. The desired value is given by the formula Pert.
+#Use nano to copy and paste the codes below. Use ^x to exit and save as q6.py
+print('Savings Calculator')
+import sys
+import math
+r = float(sys.argv[1])
+t = int(sys.argv[2])
+P = float(sys.argv[3])
+final = P * pow(math.e,(r* t))
+print("After %d years, the savings of principal $%.2f at interest rate %.2f will be $%.2f" % (t, P, r, final))
+#To test, run “python3 q6.py 0.1 1 1”. It returns “After 1 years, the savings of principal $1.00 at interest rate 0.10 will be $1.11”.
